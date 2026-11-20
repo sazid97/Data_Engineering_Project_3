@@ -1,5 +1,5 @@
 import pandas as pd
-from databricks.sdk import dbutils
+from databricks.sdk.runtime import dbutils
 
 def get_pg_config(dbutils, scope:str ='pg-scope'):
     keys = ["db-host", "db-name", "db-user", "db-password", "db-port"]
