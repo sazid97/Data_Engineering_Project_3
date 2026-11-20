@@ -12,7 +12,7 @@ cnfg = get_pg_config(dbutils)
 df = (
     spark.read.format("jdbc").option(
         "url", f'jdbc:postgresql://{cnfg["db-host"]}:{cnfg["db-port"]}/{cnfg["db-name"]}'
-    ).option("dbtable", "raw_orders").option("user", cnfg["db-user"]).option("password", cnfg["db-password"]).option(
+    ).option("dbtable", "oltp.raw_orders").option("user", cnfg["db-user"]).option("password", cnfg["db-password"]).option(
         "driver", "org.postgresql.Driver"
     ).option("sslmode", "require").load()
 )
