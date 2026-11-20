@@ -14,6 +14,6 @@ df = (
         "url", f'jdbc:postgresql://{cnfg["db-host"]}:{cnfg["db-port"]}/{cnfg["db-name"]}'
     ).option("dbtable", "raw_orders").option("user", cnfg["db-user"]).option("password", cnfg["db-password"]).option(
         "driver", "org.postgresql.Driver"
-    ).load()
+    ).option("sslmode", "require").load()
 )
 df.write.format('delta').mode("append").saveAsTable("project_3.bronze.raw_orders")
