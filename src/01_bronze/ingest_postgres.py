@@ -24,4 +24,4 @@ df = (
         "driver", "org.postgresql.Driver"
     ).option("sslmode", "require").load()
 )
-df.write.format('delta').mode("overwrite").saveAsTable("project_3.bronze.raw_orders")
+df.write.format('delta').mode("overwrite").saveAsTable("project_3.bronze.Customers")
