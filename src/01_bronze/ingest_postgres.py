@@ -9,11 +9,19 @@ def get_pg_config(dbutils, scope:str ='pg-scope'):
     return config
 
 cnfg = get_pg_config(dbutils)
+# df = (
+#     spark.read.format("jdbc").option(
+#         "url", f'jdbc:postgresql://{cnfg["db-host"]}:{cnfg["db-port"]}/{cnfg["db-name"]}'
+#     ).option("dbtable", "oltp.raw_orders").option("user", cnfg["db-user"]).option("password", cnfg["db-password"]).option(
+#         "driver", "org.postgresql.Driver"
+#     ).option("sslmode", "require").load()
+# )
+
 df = (
     spark.read.format("jdbc").option(
         "url", f'jdbc:postgresql://{cnfg["db-host"]}:{cnfg["db-port"]}/{cnfg["db-name"]}'
-    ).option("dbtable", "oltp.raw_orders").option("user", cnfg["db-user"]).option("password", cnfg["db-password"]).option(
+    ).option("dbtable", "oltp.Customers").option("user", cnfg["db-user"]).option("password", cnfg["db-password"]).option(
         "driver", "org.postgresql.Driver"
     ).option("sslmode", "require").load()
 )
-df.write.format('delta').mode("append").saveAsTable("project_3.bronze.raw_orders")
+df.write.format('delta').mode("overwrite").saveAsTable("project_3.bronze.raw_orders")
